@@ -131,3 +131,93 @@
   display: block;
   margin: 0 auto 10px; 
 }
+/* this is for exit clearance */
+/*Exit Clearance stylesheet*/
+.paragraph, .exit-title{
+  margin: 20px;
+  text-align: left;
+}
+.exit-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  text-align: left;
+  padding: 20px;
+}
+
+.exit-content-holder{
+  display: flex;
+  flex-direction: row;
+}
+
+.exit-inputbox{
+  border-radius: 5px;
+  border: 1px solid gray;
+  width: 50%;
+  padding: 5px;
+}
+
+@media only screen and (min-width: 280px){
+  .exit-container{
+    display: grid;
+    grid-template-columns: auto;
+  }
+  .exit-inputbox{
+    overflow-x: hidden;
+  }
+}
+@media only screen and (min-width: 760px){
+  .exit-container{
+    display: grid;
+    grid-template-columns: auto auto;
+  } 
+  .exit-inputbox{
+    overflow-x: hidden;
+  }
+}
+
+.exit-item {
+  text-align: left;   
+  margin-left: 10px;
+  width: 50%;
+}
+
+
+/*A. Project Manager/PIC/Department Manager*/
+.exit-container-A{
+  text-align: left;
+  padding: 20px;
+}
+
+.exit-content-holder-A{
+  display:flex;
+  flex-direction: row;
+}
+.exit-inputbox-A {
+  border-radius: 5px;
+  border: 1px solid;
+  padding: 5px;
+  width: 50%;
+}
+
+/*B. Administration Clearance: The following items were returned by the employee:*/
+.exit-container-B, .exit-container-C{
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 20px;
+}
+.exit-inputbox-B, .exit-inputbox-C{
+  margin: 5px;
+}
+.exit-item-B, .exit-inputbox-C {
+  text-align: left;   
+  margin-left: 10px;
+  width: 100%;
+}
+
+/*D*/
+.exit-item-D{
+  border-top: 1px solid ;
+  width: 35%;
+  margin: auto;
+  padding-bottom: 25px;
+}

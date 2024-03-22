@@ -1,4 +1,4 @@
-class userAccount{
+class Employee{
     constructor(UserName, LastName, FirstName, MiddleName, Email, Password){
         // this.employee_id = employee_id;
         this.UserName = UserName;
@@ -11,6 +11,6 @@ class userAccount{
 
     }
 }
-module.exports =   userAccount ;
+module.exports =   Employee ;
     
 
