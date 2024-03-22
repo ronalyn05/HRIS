@@ -1,10 +1,14 @@
 import React from "react";
-// import logo from '../assets/innodataLogo.png' 
-// import profile from '../assets/image.png'
+import { Link, useLocation } from 'react-router-dom';
  import '../App.css';
 
 
  function Navbar() {
+
+  // Get user data from location state
+  const location = useLocation();
+  const data = location.state;
+
      return (
          <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
              {/* Sidebar - Brand */}
@@ -20,10 +24,10 @@ import React from "react";
              <hr className="sidebar-divider my-0" />
              {/* Nav Item - Dashboard */}
              <li className="nav-item">
-                 <a className="nav-link" href="/dashboard">
-                     <i className="fas fa-fw fa-tachometer-alt"></i>
-                     <span>Dashboard</span>
-                 </a>
+                <Link className="nav-link" to={{ pathname: "/dashboard"}} state={data}>
+                <i className="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                  </Link>
              </li>
              {/* Divider */}
              <hr className="sidebar-divider" />
@@ -33,31 +37,33 @@ import React from "react";
              </div>
              {/* Nav Item - New Hire Upload */}
              <li className="nav-item">
-                 <a className="nav-link" href="/newHireUpload">
-                     <i className="fas fa-fw fa-upload"></i>
-                     <span>New Hire Upload</span>
-                 </a>
+                 {/* <a className="nav-link" href="/newHireUpload"> */}
+                 <Link className="nav-link" to={{ pathname: "/newHireUpload"}} state={data}>
+                  <i className="fas fa-fw fa-upload"></i>
+                  <span>New Hire Upload</span>
+                </Link>
+                 {/* </a> */}
              </li>
              {/* Nav Item - Self Service Movement */}
              <li className="nav-item">
-                 <a className="nav-link" href="/movement">
-                     <i className="fas fa-fw fa-handshake"></i>
-                     <span>Self Service Movement</span>
-                 </a>
+             <Link className="nav-link" to={{ pathname: "/movement"}} state={data} >
+                <i className="fas fa-fw fa-handshake"></i>
+                <span>Self Service Movement</span>
+              </Link>
              </li>
              {/* Nav Item - Exit Clearance Processing */}
              <li className="nav-item">
-                 <a className="nav-link" href="/exitclearance">
-                     <i className="fas fa-fw fa-sign-out-alt"></i>
-                     <span>Exit Clearance Processing</span>
-                 </a>
+             <Link className="nav-link" to={{ pathname: "/exitclearance"}} state={data}>
+                <i className="fas fa-fw fa-sign-out-alt"></i>
+                <span>Exit Clearance Processing</span>
+            </Link>
              </li>
              {/* Nav Item - HR/Admin Module */}
              <li className="nav-item">
-                 <a className="nav-link" href="/adminModule">
-                     <i className="fas fa-fw fa-user-tie"></i>
-                     <span>HR/Admin Module</span>
-                 </a>
+             <Link className="nav-link" to={{ pathname: "/adminModule"}} state={data} >
+                <i className="fas fa-fw fa-user-tie"></i>
+                <span>HR/Admin Module</span>
+              </Link>
              </li>
              {/* Sidebar Toggler (Sidebar) */}
              <div className="text-center d-none d-md-inline">
