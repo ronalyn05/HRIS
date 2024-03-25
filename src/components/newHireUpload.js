@@ -4,12 +4,16 @@ import * as XLSX from 'xlsx';
 import Navbar from './navbar';
 import TopNavbar from './topnavbar'; 
 import Footer from './footer';
+import $ from 'jquery'; // Import jQuery
+import 'bootstrap/dist/js/bootstrap.bundle'; // Import Bootstrap JavaScript
 
 const NewHireUpload = () => {
 
   const [file, setFile] = useState('');
   const [excelData, setExcelData] = useState([]);
   const [employees, setEmployees] = useState([]);
+  const [showModal, setShowModal] = useState(false); 
+
 
   // Inside handleFileChange function
   const handleFileChange = async (e) => {
@@ -120,7 +124,15 @@ useEffect(() => {
   fetchData();
 }, []); // Empty dependency array to run only once when the component mounts
 
-  
+  // Function to open modal
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  // Function to close modal
+  const closeModal = () => {
+    setShowModal(false);
+  };
   
   return (
     
@@ -173,8 +185,7 @@ useEffect(() => {
                       <table className="table">
                         <thead>
                           <tr>
-                            {/* <th scope="col" className='center'>EMPLOYEE ID</th> */}
-                            
+                            {/* <th scope="col" className='center'>EMPLOYEE ID</th> */} 
                             <th scope="col">ACTION</th>
                             <th scope="col">EMPLOYEE ID</th>
                             <th scope="col">NAME</th>
@@ -203,15 +214,23 @@ useEffect(() => {
                             employees.map(employee => (
                               <tr key={employee.EmpID}>
                                 <td>
-                                <button
-                                  className="update-button"
-                                  onClick={() => {
-                                    // Handle update action here, e.g., navigate to update page
-                                    console.log(`Update employee with ID ${employee.EmpID}`);
-                                  }}
+                                <td>
+                                  <button
+                                    className="update-button"
+                                    onClick={() => openModal()} // Open modal on button click
+                                  >
+                                    <i className="fas fa-pencil-alt"></i> Update
+                                  </button>
+                                </td>
+                                {/* <button
+                                  className="update-button" onClick={openModal}
+                                  // onClick={() => {
+                                  //   // Handle update action here, e.g., navigate to update page
+                                  //   console.log(`Update employee with ID ${employee.EmpID}`);
+                                  // }}
                                 >
                                   <i className="fas fa-pencil-alt"></i> Update
-                                </button>
+                                </button> */}
                               </td>
                                 <td>{employee.EmpID}</td>
                                 <td>{employee.Name}</td>
@@ -241,54 +260,6 @@ useEffect(() => {
                             </tr>
                           )}
                         </tbody>
-                        {/* <tbody>
-                        {employees.map(employee => (
-                    <tr key={employee.EmpID}>
-                        <td>{employee.EmpName}</td>
-                        <td>{employee.EmpFirstName}</td>
-                        <td>{employee.EmpMiddleName}</td>
-                        <td>{employee.EmpBirthdate}</td>
-                        <td>{employee.EmpAge}</td>
-                        <td>{employee.EmpBirthMonth}</td>
-                        <td>{employee.EmpAgeBracket}</td>
-                        <td>{employee.EmpGender}</td>
-                        <td>{employee.EmpMaritalStatus}</td>
-                        <td>{employee.EmpPHIC}</td>
-                        <td>{employee.EmpHDMF}</td>
-                        <td>{employee.EmpTIN}</td>
-                        <td>{employee.EmpID}</td>
-                        <td>{employee.EmpAddressID}</td>
-                        <td>{employee.EmpHRANID}</td>
-                        <td>{employee.EmpContactNumber}</td>
-                        <td>{employee.EmpEmailAddress}</td>
-                    </tr>
-                ))}
-                        {excelData.map((row, rowIndex) => (
-                          <tr key={rowIndex}>
-                            <td>{row[0]}</td>
-                            <td>{row[1]}</td>
-                            <td>{row[2]}</td>
-                            <td>{row[3]}</td>
-                            <td>{row[4]}</td>
-                            <td>{row[5]}</td>
-                            <td>{row[6]}</td>
-                            <td>{row[7]}</td>
-                            <td>{row[8]}</td>
-                            <td>{row[9]}</td>
-                            <td>{row[10]}</td>
-                            <td>{row[11]}</td>
-                            <td>{row[12]}</td>
-                            <td>{row[13]}</td>
-                            <td>{row[14]}</td>
-                            <td>{row[15]}</td>
-                            <td>{row[16]}</td>
-                            <td>{row[17]}</td>
-                            <td>{row[18]}</td>
-                            <td>{row[19]}</td>
-                            {/* <td>{row[17]}</td> 
-                          </tr>
-                        ))}
-                        </tbody> */}
                       </table>
                        {/* ) : (
                         <div>No File Selected</div>
@@ -306,6 +277,30 @@ useEffect(() => {
           </div>
           {/* Footer */}
           <Footer />
+           {/* Modal for Update */}
+    {showModal && (
+      <div className="modal fade show" id="updateModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style={{ display: 'block' }}>
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Update Employee</h5>
+              <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={closeModal}>
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              {/* Add your update form content here */}
+              <p>Update employee information here.</p>
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={closeModal}>Close</button>
+              {/* Add your update action button here if needed */}
+            </div>
+          </div>
+        </div>
+      </div>
+    )}
+
           {/* End of Page Content */}
         </div>
         {/* End of Content Wrapper */}
@@ -316,7 +311,7 @@ useEffect(() => {
         <i className="fas fa-angle-up"></i>
       </a> */}
       {/* Logout Modal*/}
-      {/* <div className="modal fade" id="logoutModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      {/* <div className="modal fade" id="updateModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
@@ -332,7 +327,7 @@ useEffect(() => {
             </div>
           </div>
         </div>
-      </div> */}
+      </div>  */}
     </body>
   );
 }
