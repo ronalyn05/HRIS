@@ -10,7 +10,9 @@ import ExitClearance from './components/exitclearance';
 import AdminModule from './components/adminModule';
 import Footer from './components/footer';
 
+
 function App() {
+  
   return (
     <Router>
       <div className="App">

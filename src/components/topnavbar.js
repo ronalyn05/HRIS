@@ -1,6 +1,7 @@
 
 import React from "react";
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
  import '../App.css';
 
   function TopNavbar() {
@@ -20,7 +21,24 @@ import { useLocation, useNavigate } from 'react-router-dom';
       navigate('../');
   };
 
+
+    const location = useLocation();
+    const navigate = useNavigate();
+    const data = location.state
+
+    const FirstName = location.state ? location.state.FirstName : '';
+    const LastName = location.state ? location.state.LastName : '';
+
+    const handleLogout = () => {
+      // Clear stored login data
+      localStorage.removeItem('user');
+
+      // Redirect to login page
+      navigate('../');
+  };
+
       return (
+        
         
           <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
               {/* Sidebar Toggle (Topbar) */}
@@ -56,6 +74,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
                             <span className="mr-2 d-none d-lg-inline text-gray-600 small">{FirstName} {LastName}</span>
                             <img className="img-profile rounded-circle" src="img/undraw_profile.svg" alt="User Profile" />
                         </a>
+                            <span className="mr-2 d-none d-lg-inline text-gray-600 small">{FirstName} {LastName}</span>
+                            <img className="img-profile rounded-circle" src="img/undraw_profile.svg" alt="User Profile" />
+                        </a>
                       {/* Dropdown - User Information */}
                       <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                           <a className="dropdown-item" href="#">
@@ -75,10 +96,15 @@ import { useLocation, useNavigate } from 'react-router-dom';
                             <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                             Logout
                         </a>
+                          <a className="dropdown-item" data-toggle="modal" onClick={handleLogout}>
+                            <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Logout
+                        </a>
                       </div>
                   </li>
               </ul>
           </nav>
+          
           
       );
   }
