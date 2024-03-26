@@ -95,19 +95,32 @@ app.get('/newHireEmp', async (req, res) => {
 });
 // Endpoint to retrieve employee by ID
 app.get('/newHireEmp/:employeeId', async (req, res) => {
-  const employeeId = req.params.employeeId;
+  const { employeeId } = req.params;
   try {
-    const employee = await getEmployeeById(employeeId);
+    const employee = await dbOperation.getEmployeeById(employeeId);
     if (!employee) {
-      res.status(404).json({ error: 'Employee not found' });
-      return;
+      return res.status(404).json({ message: 'Employee not found' });
     }
-    res.status(200).json(employee);
+    res.json(employee);
   } catch (error) {
-    console.error('Error retrieving employee data:', error);
-    res.status(500).send('Error retrieving employee data.');
+    console.error('Error fetching employee:', error);
+    res.status(500).json({ message: 'Internal server error' });
   }
 });
+// app.get('/newHireEmp/:employeeId', async (req, res) => {
+//   const employeeId = req.params.employeeId;
+//   try {
+//     const employee = await getEmployeeById(employeeId);
+//     if (!employee) {
+//       res.status(404).json({ error: 'Employee not found' });
+//       return;
+//     }
+//     res.status(200).json(employee);
+//   } catch (error) {
+//     console.error('Error retrieving employee data:', error);
+//     res.status(500).send('Error retrieving employee data.');
+//   }
+// });
 
 // Start the server
 app.listen(port, () => {
