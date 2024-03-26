@@ -9,6 +9,7 @@ import Movement from './components/movement';
 import ExitClearance from './components/exitclearance';
 import AdminModule from './components/adminModule';
 import Footer from './components/footer';
+import UpdateEmployeeInfo from './components/update'; 
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="/exitclearance" element={<ExitClearance />} />
           <Route path="/adminModule" element={<AdminModule />} />
           <Route path="/footer" element={<Footer />} />
+          <Route path="/update/:employeeId" element={<UpdateEmployeeInfo />} />
         </Routes>
       </div>
     </Router>

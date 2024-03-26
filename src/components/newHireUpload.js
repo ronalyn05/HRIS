@@ -4,16 +4,25 @@ import * as XLSX from 'xlsx';
 import Navbar from './navbar';
 import TopNavbar from './topnavbar'; 
 import Footer from './footer';
-import $ from 'jquery'; // Import jQuery
-import 'bootstrap/dist/js/bootstrap.bundle'; // Import Bootstrap JavaScript
+import { useNavigate } from "react-router-dom";
+// import UpdateEmployeeInfo from './components/update';
 
 const NewHireUpload = () => {
 
   const [file, setFile] = useState('');
   const [excelData, setExcelData] = useState([]);
   const [employees, setEmployees] = useState([]);
-  const [showModal, setShowModal] = useState(false); 
 
+  const navigate = useNavigate();
+  
+  //  // Get user data from location state
+  //  const location = useLocation();
+  //  const data = location.state;
+
+  const handleUpdate = (employeeId) => {
+    // Redirect to the update page with employee ID as a parameter
+    navigate(`/update/${employeeId}`);
+  };
 
   // Inside handleFileChange function
   const handleFileChange = async (e) => {
@@ -124,15 +133,6 @@ useEffect(() => {
   fetchData();
 }, []); // Empty dependency array to run only once when the component mounts
 
-  // Function to open modal
-  const openModal = () => {
-    setShowModal(true);
-  };
-
-  // Function to close modal
-  const closeModal = () => {
-    setShowModal(false);
-  };
   
   return (
     
@@ -181,11 +181,9 @@ useEffect(() => {
                 <div className="tab-pane fade" id="newHireReports" role="tabpanel" aria-labelledby="reports-tab">
                   <div className="card-body">
                     <div className="table-responsive">
-                    {/* {excelData.length > 0 ? ( */}
                       <table className="table">
                         <thead>
                           <tr>
-                            {/* <th scope="col" className='center'>EMPLOYEE ID</th> */} 
                             <th scope="col">ACTION</th>
                             <th scope="col">EMPLOYEE ID</th>
                             <th scope="col">NAME</th>
@@ -214,23 +212,12 @@ useEffect(() => {
                             employees.map(employee => (
                               <tr key={employee.EmpID}>
                                 <td>
-                                <td>
-                                  <button
-                                    className="update-button"
-                                    onClick={() => openModal()} // Open modal on button click
+                                <button
+                                    className="update-button" 
+                                    onClick={() => handleUpdate(employee.EmpID)} // Call handleUpdate with employee ID
                                   >
                                     <i className="fas fa-pencil-alt"></i> Update
                                   </button>
-                                </td>
-                                {/* <button
-                                  className="update-button" onClick={openModal}
-                                  // onClick={() => {
-                                  //   // Handle update action here, e.g., navigate to update page
-                                  //   console.log(`Update employee with ID ${employee.EmpID}`);
-                                  // }}
-                                >
-                                  <i className="fas fa-pencil-alt"></i> Update
-                                </button> */}
                               </td>
                                 <td>{employee.EmpID}</td>
                                 <td>{employee.Name}</td>
@@ -248,7 +235,6 @@ useEffect(() => {
                                 <td>{employee.PHIC}</td>
                                 <td>{employee.HDMF}</td>
                                 <td>{employee.TIN}</td>
-                                {/* <td>{employee.AddressID}</td> */}
                                 <td>{employee.HRANID}</td>
                                 <td>{employee.ContactNumber}</td>
                                 <td>{employee.EmailAddress}</td> 
@@ -261,9 +247,6 @@ useEffect(() => {
                           )}
                         </tbody>
                       </table>
-                       {/* ) : (
-                        <div>No File Selected</div>
-                      )} */}
                     </div>
                   </div>
                 </div>
@@ -277,57 +260,11 @@ useEffect(() => {
           </div>
           {/* Footer */}
           <Footer />
-           {/* Modal for Update */}
-    {showModal && (
-      <div className="modal fade show" id="updateModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style={{ display: 'block' }}>
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">Update Employee</h5>
-              <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={closeModal}>
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              {/* Add your update form content here */}
-              <p>Update employee information here.</p>
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={closeModal}>Close</button>
-              {/* Add your update action button here if needed */}
-            </div>
-          </div>
-        </div>
-      </div>
-    )}
-
           {/* End of Page Content */}
         </div>
         {/* End of Content Wrapper */}
       </div>
       {/* End of Page Wrapper */}
-      {/* Scroll to Top Button*/}
-      {/* <a className="scroll-to-top rounded" href="#page-top">
-        <i className="fas fa-angle-up"></i>
-      </a> */}
-      {/* Logout Modal*/}
-      {/* <div className="modal fade" id="updateModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-              <button className="close" type="button" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-              </button>
-            </div>
-            <div className="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div className="modal-footer">
-              <button className="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-              <a className="btn btn-primary" href="login.html">Logout</a>
-            </div>
-          </div>
-        </div>
-      </div>  */}
     </body>
   );
 }

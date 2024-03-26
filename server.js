@@ -93,6 +93,21 @@ app.get('/newHireEmp', async (req, res) => {
       res.status(500).send('Error retrieving employee data.');
   }
 });
+// Endpoint to retrieve employee by ID
+app.get('/newHireEmp/:employeeId', async (req, res) => {
+  const employeeId = req.params.employeeId;
+  try {
+    const employee = await getEmployeeById(employeeId);
+    if (!employee) {
+      res.status(404).json({ error: 'Employee not found' });
+      return;
+    }
+    res.status(200).json(employee);
+  } catch (error) {
+    console.error('Error retrieving employee data:', error);
+    res.status(500).send('Error retrieving employee data.');
+  }
+});
 
 // Start the server
 app.listen(port, () => {

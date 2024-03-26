@@ -112,6 +112,26 @@ const getAllNewHireEmployees = async () => {
         throw error;
     }
 };
+// Retrieve employee by ID from the database
+const getEmployeeById = async (employeeId) => {
+    try {
+        let pool = await sql.connect(config);
+        let result = await pool
+            .request()
+            .input('employeeId', sql.Int, employeeId)
+            .query('SELECT * FROM Employee WHERE EmpID = @employeeId');
+
+        if (result.recordset.length === 0) {
+            return null; // Return null if employee with given ID is not found
+        }
+        
+        return result.recordset[0]; // Return the first employee found with the given ID
+    } catch (error) {
+        console.error('Error fetching employee by ID:', error);
+        throw error;
+    }
+};
+
 
 //Update the employee 
 const updatedEmp = async (Employee) => {
@@ -138,5 +158,6 @@ module.exports = {
     insertEmployee, 
     getEmployees ,
     insertNewHire,
-    getAllNewHireEmployees
+    getAllNewHireEmployees,
+    getEmployeeById
 };

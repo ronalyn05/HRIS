@@ -119,7 +119,8 @@ function Dashboard() {
                                 <div className="col mr-2">
                                     <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                         Numbers of new hire (Monthly)</div>
-                                    <div className="h5 mb-0 font-weight-bold text-gray-800">50</div>
+                                    <div className="h5 mb-0 font-weight-bold text-gray-800">50 </div>
+                                    <h6 className="font-weight-bold text-center text-danger"> static pa ni </h6>
                                 </div>
                                 <div className="col-auto">
                                     <i className="fas fa-calendar fa-2x text-gray-300"></i>
@@ -154,6 +155,7 @@ function Dashboard() {
                                     <div className="text-xs font-weight-bold text-info text-uppercase mb-1">
                                     Self-Service Movement Record</div>
                                     <div className="h5 mb-0 font-weight-bold text-gray-800">5</div>
+                                    <h6 className="font-weight-bold text-center text-danger"> static pa ni </h6>
                                 </div>
                                 <div className="col-auto">
                                 <i className="fas fa-user-cog fa-2x text-gray-300"></i>
@@ -171,6 +173,7 @@ function Dashboard() {
                                     <div className="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                     Pending Exit Approval</div>
                                     <div className="h5 mb-0 font-weight-bold text-gray-800">10</div>
+                                    <h6 className="font-weight-bold text-center text-danger"> static pa ni </h6>
                                 </div>
                                 <div className="col-auto">
                                 <i className="fas fa-sign-out-alt fa-2x text-gray-300"></i>

@@ -65,6 +65,15 @@ import { Link, useLocation } from 'react-router-dom';
                 <span>HR/Admin Module</span>
               </Link>
              </li>
+             <Link 
+            className="nav-link" 
+            to={{ 
+                pathname: "/updateEmployeeInfo", 
+                state: data // Pass your data object here
+            }}
+            >
+            {/* Your Link content */}
+            </Link>
              {/* Sidebar Toggler (Sidebar) */}
              <div className="text-center d-none d-md-inline">
           <button className="rounded-circle border-0" id="sidebarToggle"></button>
