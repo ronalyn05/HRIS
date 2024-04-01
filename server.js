@@ -107,6 +107,21 @@ app.get('/newHireEmp/:employeeId', async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 });
+// Endpoint to update employee by ID
+app.put('/updateEmployee/:employeeId', async (req, res) => {
+  const { employeeId } = req.params;
+  const updatedEmployeeData = req.body;
+  try {
+    const result = await dbOperation.updateEmployeeById(employeeId, updatedEmployeeData);
+    if (!result) {
+      return res.status(404).json({ message: 'Employee not found' });
+    }
+    res.json({ message: 'Employee updated successfully' });
+  } catch (error) {
+    console.error('Error updating employee:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
 // app.get('/newHireEmp/:employeeId', async (req, res) => {
 //   const employeeId = req.params.employeeId;
 //   try {

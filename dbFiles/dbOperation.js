@@ -132,7 +132,60 @@ const getEmployeeById = async (employeeId) => {
     }
 };
 
-
+const updateEmployeeById = async (employeeId, updatedEmployeeData) => {
+    try {
+      let pool = await sql.connect(config);
+      let result = await pool.request()
+        .input('employeeId', sql.Int, employeeId)
+        .input('Name', sql.VarChar(255), updatedEmployeeData.Name)
+        .input('LastName', sql.VarChar(255), updatedEmployeeData.LastName)
+        .input('FirstName', sql.VarChar(255), updatedEmployeeData.FirstName)
+        .input('MiddleName', sql.VarChar(255), updatedEmployeeData.MiddleName)
+        .input('MaidenName', sql.VarChar(255), updatedEmployeeData.MaidenName)
+        .input('Birthdate', sql.VarChar(255), updatedEmployeeData.Birthdate)
+        .input('Age', sql.VarChar(255), updatedEmployeeData.Age)
+        .input('BirthMonth', sql.VarChar(255), updatedEmployeeData.BirthMonth)
+        .input('AgeBracket', sql.VarChar(255), updatedEmployeeData.AgeBracket)
+        .input('Gender', sql.VarChar(255), updatedEmployeeData.Gender)
+        .input('MaritalStatus', sql.VarChar(255), updatedEmployeeData.MaritalStatus)
+        .input('SSS', sql.VarChar(255), updatedEmployeeData.SSS)
+        .input('PHIC', sql.VarChar(255), updatedEmployeeData.PHIC)
+        .input('HDMF', sql.VarChar(255), updatedEmployeeData.HDMF)
+        .input('TIN', sql.VarChar(255), updatedEmployeeData.TIN)
+        .input('HRANID', sql.VarChar(255), updatedEmployeeData.HRANID)
+        .input('ContactNumber', sql.VarChar(255), updatedEmployeeData.ContactNumber)
+        .input('EmailAddress', sql.VarChar(255), updatedEmployeeData.EmailAddress)
+        
+        .query(`
+          UPDATE Employee 
+          SET Name = @Name,
+              LastName = @LastName, 
+              FirstName = @FirstName,
+              MiddleName = @MiddleName,
+              MaidenName = @MaidenName, 
+              Birthdate = @Birthdate,
+              Age = @Age,
+              BirthMonth = @BirthMonth,
+              AgeBracket = @AgeBracket,
+              Gender = @Gender,
+              MaritalStatus = @MaritalStatus,
+              SSS = @SSS,
+              PHIC = @PHIC,
+              HDMF = @HDMF,
+              TIN = @TIN,
+              HRANID = @HRANID, 
+              ContactNumber = @ContactNumber,
+              EmailAddress = @EmailAddress
+          WHERE EmpID = @employeeId
+        `);
+  
+      return result;
+    } catch (error) {
+      console.error('Error updating employee by ID:', error);
+      throw error;
+    }
+  };
+  
 //Update the employee 
 const updatedEmp = async (Employee) => {
     try {
@@ -159,5 +212,6 @@ module.exports = {
     getEmployees ,
     insertNewHire,
     getAllNewHireEmployees,
+    updateEmployeeById,
     getEmployeeById
 };
