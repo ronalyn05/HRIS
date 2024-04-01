@@ -154,7 +154,7 @@ import '../App.css';
                     <div className="col-md-4">
                       <div className="form-group">
                         <label htmlFor="maidenName">Maiden Name</label>
-                        <input type="text" className="form-control" id="maidenName" name="MaidenName" value={employeeData.MaidenName} onChange={handleInputChange} />
+                        <input type="text" className="form-control" id="maidenName" name="maidenName" value={employeeData.MaidenName} onChange={handleInputChange} />
                       </div>
                     </div>
                   </div>
@@ -245,7 +245,6 @@ import '../App.css';
                     <button type="submit" className="btn btn-primary d-block mx-auto">Update Employee</button>
                   </form>
                   <br />
-
               </div>
             </div>
           </div>
